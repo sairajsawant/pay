@@ -57,13 +57,28 @@ request = buildPaymentRequest();
 // }
   function onNewSupportedMethod(){
       request = buildPaymentRequest();
-      request.canMakePayment().then(function(result) {
-          console.log("here canMakePayment result= ", result);
-          if(result == true)
+      // request.canMakePayment().then(function(result) {
+      //     console.log("here canMakePayment result= ", result);
+      //     if(result == true)
+      //       onPayClick();
+      // }).catch(function(err) {
+      //     console.log("here canMakePayment error handler and error= ", err); 
+      // });
+      // Checking for instrument presence.
+      const handleInstrumentPresence = response => { 
+        console.log(response)
+        if(response == true)
             onPayClick();
-      }).catch(function(err) {
-          console.log("here canMakePayment error handler and error= ", err); 
-      });
+      }
+      const handleError = error => {
+        console.log(error)
+      }
+      if (request.hasEnrolledInstrument) {
+        // hasEnrolledInstrument() is available.
+        request.hasEnrolledInstrument().then(handleInstrumentPresence).catch(handleError);
+      } else {
+        request.canMakePayment().then(handleInstrumentPresence).catch(handleError);
+      }
   }
   function onProcessClicked() {
     
