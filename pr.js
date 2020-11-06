@@ -42,8 +42,8 @@ function buildPaymentRequest(url) {
     console.log(supportedInstruments, details)
     request = new PaymentRequest(supportedInstruments, details);
   
-    localStorage.setItem('request', request);
-    console.log(localStorage.getItem('request'))
+    localStorage.setItem('request', JSON.stringify(request));
+    console.log(localStorage.getItem('request'),JSON.parse(localStorage.getItem('request'))
     return request;
   }
   
@@ -52,7 +52,9 @@ function buildPaymentRequest(url) {
 
   function onNewSupportedMethod() {
       // request = buildPaymentRequest();
-      request = localStorage.getItem('request')
+      const retrievedObject = localStorage.getItem('request')
+      const request = JSON.parse(retrievedObject)
+      console.log(retrievedObject,request)
       const handleInstrumentPresence = response => { 
         console.log(response)
         if(response == true)
