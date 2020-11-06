@@ -7,13 +7,13 @@
   <title>Phonepe mIntent Flow</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
+<body onload="buildPaymentRequest()">
   <div id="contents">
-    <h1>Phonepe mIntent</h1>
-    <p>This merchant accepts Phonepe only.</p>
+    <h1>Web Payment Testing</h1>
+    <!-- <p>This merchant accepts Phonepe only.</p> -->
 <!--     <p>Enter intent url: <input style="font-weight: bold; border-color: olivedrab" name="price" id="inputPrice"/></p> -->
     <p>Enter Supported method url: <input style="font-weight: bold; border-color: olivedrab" name="supportedMethod" id="inputSuportedMethod"/></p>
-    <p><button style="font-weight: bolder;" onclick="onNewSupportedMethod()">Use New Supported Method canMake Payment</button></p>
+    <p><button style="font-weight: bolder;" onclick="onNewSupportedMethod()">Use hasEnrollInstrument Payment method</button></p>
     <p><button style="font-weight: bolder;" onclick="onPayClick()">Initiate show()</button></p>
 <!--<p><button style="font-weight: bolder;" onclick="onProcessClicked()">Proceed</button></p>
     <p><button id="payByPhonepeButton" style="font-weight: bolder;" onclick="onPayClick()" class="hiddenElement">Pay By Phonepe</button></p> -->

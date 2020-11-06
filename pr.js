@@ -6,18 +6,18 @@ let mId, canMakePaymentResult = false;
 function buildPaymentRequest(url) {
     if (!window.PaymentRequest) {
       return null;
-    }
-    
+    } 
 //     const supportedInstruments = [{
 //         supportedMethods: "https://phonepay.herokuapp.com/pay",
 //         data: {
 //             url: url
 //         }
-//     }];
-    
+//     }]; 
+    console.log('https://mercury.phonepe.com/transact/pay')
     const supportedInstruments = [
      {
-      supportedMethods: [document.getElementById("inputSuportedMethod").value],     //['https://tez.google.com/pay'],
+      // supportedMethods: [document.getElementById("inputSuportedMethod").value],     //['https://tez.google.com/pay'],
+      supportedMethods: ['https://mercury.phonepe.com/transact/pay'],
       data: {
         pa: 'PRACT0@ybl',
         pn: 'PRACT',
@@ -39,32 +39,20 @@ function buildPaymentRequest(url) {
     };
   
     let request = null;
+    console.log(supportedInstruments, details)
+    request = new PaymentRequest(supportedInstruments, details);
   
-//     try {
-      request = new PaymentRequest(supportedInstruments, details);
-  
+    localStorage.setItem('request', request);
+    console.log(localStorage.getItem('request'))
     return request;
   }
   
   let request = null;
-request = buildPaymentRequest();
+  request = buildPaymentRequest();
 
-//   document.getElementsByName("price")[0].addEventListener('change', doThing);
-
-// function doThing() {
-//     var amount = document.getElementById("inputPrice").value;
-//     request = buildPaymentRequest(amount);
-// }
-  function onNewSupportedMethod(){
-      request = buildPaymentRequest();
-      // request.canMakePayment().then(function(result) {
-      //     console.log("here canMakePayment result= ", result);
-      //     if(result == true)
-      //       onPayClick();
-      // }).catch(function(err) {
-      //     console.log("here canMakePayment error handler and error= ", err); 
-      // });
-      // Checking for instrument presence.
+  function onNewSupportedMethod() {
+      // request = buildPaymentRequest();
+      request = localStorage.getItem('request')
       const handleInstrumentPresence = response => { 
         console.log(response)
         if(response == true)
@@ -81,7 +69,6 @@ request = buildPaymentRequest();
       }
   }
   function onProcessClicked() {
-    
 //     var amount = document.getElementById("inputPrice").value;
 //     var payload = {
 //        "merchantId":"M2306160483220675579140",
@@ -113,12 +100,12 @@ request = buildPaymentRequest();
 //                request.canMakePayment().then(function(result) {
 //                   if(result){
 //                     console.log("We are here in canMake payment handler");
-                request.show()
-                .then(handlePaymentResponse)
-                .catch(function(err) {
-                  error(err);
-                  request = buildPaymentRequest();
-                });
+      request.show()
+      .then(handlePaymentResponse)
+      .catch(function(err) {
+        error(err);
+        request = buildPaymentRequest();
+      });
   }
 
 
@@ -244,9 +231,9 @@ request = buildPaymentRequest();
     }
   
     try {
-                      request.show()
-                        .then(response => response.complete("success"))
-                        .catch(err => console.log("Error handling payment request: " + err));
+        request.show()
+          .then(response => response.complete("success"))
+          .catch(err => console.log("Error handling payment request: " + err));
 
     } catch (e) {
       error('Developer mistake: \'' + e.message + '\'');
