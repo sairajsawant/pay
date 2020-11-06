@@ -1,4 +1,5 @@
 let mId, canMakePaymentResult = false;
+let request = null;
 /**
  * Initializes the payment request object.
  * @return {PaymentRequest} The payment request object.
@@ -38,23 +39,19 @@ function buildPaymentRequest(url) {
       }
     };
   
-    let request = null;
+    // let request = null;
     console.log(supportedInstruments, details)
     request = new PaymentRequest(supportedInstruments, details);
-  
-    localStorage.setItem('request', JSON.stringify(request));
-    //console.log(localStorage.getItem('request'),JSON.parse(localStorage.getItem('request'))
-    return request;
+    // localStorage.setItem('request', JSON.stringify(request));
+    // console.log(JSON.stringify(request))
+    // console.log(localStorage.getItem('request'))
+    // console.log(localStorage.getItem('request'),JSON.parse(localStorage.getItem('request'))
+    // return request;
   }
   
-  //let request = null;
-  //request = buildPaymentRequest();
-
   function onNewSupportedMethod() {
       // request = buildPaymentRequest();
-      const retrievedObject = localStorage.getItem('request')
-      const request = JSON.parse(retrievedObject)
-      console.log(retrievedObject,request)
+      console.log(request)
       const handleInstrumentPresence = response => { 
         console.log(response)
         if(response == true)
