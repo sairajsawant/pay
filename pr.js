@@ -47,8 +47,8 @@ function buildPaymentRequest(url) {
     return request;
   }
   
-  let request = null;
-  request = buildPaymentRequest();
+  //let request = null;
+  //request = buildPaymentRequest();
 
   function onNewSupportedMethod() {
       // request = buildPaymentRequest();
@@ -61,7 +61,7 @@ function buildPaymentRequest(url) {
       const handleError = error => {
         console.log(error)
       }
-      if (request.hasEnrolledInstrument) {
+      if (typeof request.hasEnrolledInstrument === 'function') {
         // hasEnrolledInstrument() is available.
         request.hasEnrolledInstrument().then(handleInstrumentPresence).catch(handleError);
       } else {
