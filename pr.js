@@ -43,7 +43,7 @@ function buildPaymentRequest(url) {
     request = new PaymentRequest(supportedInstruments, details);
   
     localStorage.setItem('request', JSON.stringify(request));
-    console.log(localStorage.getItem('request'),JSON.parse(localStorage.getItem('request'))
+    //console.log(localStorage.getItem('request'),JSON.parse(localStorage.getItem('request'))
     return request;
   }
   
